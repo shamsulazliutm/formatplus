@@ -1,0 +1,8 @@
+/** Fungsi: Buang simbol RM dari nilai wang */
+function formatWithoutRM() {
+  var sheet = SpreadsheetApp.getActiveSheet();
+  var range = sheet.getActiveRange();
+  var values = range.getValues();
+  var cleaned = values.map(row => row.map(cell => cell.toString().replace(/Rm|RM|rm/g, '')));
+  range.setValues(cleaned).setNumberFormat('#,##0.00');
+}
