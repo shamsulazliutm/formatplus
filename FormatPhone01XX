@@ -6,3 +6,19 @@ function formatPhone2() {
   var formatted = values.map(row => row.map(cell => phone02(cell)));
   range.setValues(formatted).setHorizontalAlignment("left");
 }
+
+function phone02(val) {
+  if (val === "" || /[A-Za-z]/.test(val)) return val;
+  val = val.toString().replace(/[\s\-\+\*\(\)]/g, "");
+  var formattedValue = "";
+  if (val.substring(0, 2) === "60") {
+    formattedValue = val;
+  } else if (val.substring(0, 1) === "0") {
+    formattedValue = "60" + val.substring(1);
+  } else if (val !== "") {
+    formattedValue = "60" + val;
+  } else {
+    formattedValue = "";
+  }
+  return formattedValue;
+}
