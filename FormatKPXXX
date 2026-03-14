@@ -1,0 +1,21 @@
+/** Fungsi: Format KP ke format 000000000000 */
+function formatkpa(val) {
+  if (val === "") return val;
+  if (/^[A-Za-z]/.test(val)) return val;
+  val = val.toString().replace(/[^\d]/g, "");
+  if (val.length < 12) {
+    val = '0'.repeat(12 - val.length) + val;
+  } else if (val.length > 12) {
+    val = val.slice(0, 12);
+  }
+  return val;
+}
+
+/** Fungsi: Format KP ke format 000000000000 */
+function formatKP() {
+  var sheet = SpreadsheetApp.getActiveSheet();
+  var range = sheet.getActiveRange();
+  var values = range.getValues();
+  var formatted = values.map(row => row.map(cell => formatkpa(cell)));
+  range.setNumberFormat("@").setValues(formatted).setHorizontalAlignment("center");
+}
