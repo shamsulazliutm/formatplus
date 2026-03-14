@@ -1,0 +1,8 @@
+/** Fungsi: Format nombor telefon seperti 01X-XXXXXXX */
+function formatPhone() {
+  var sheet = SpreadsheetApp.getActiveSheet();
+  var range = sheet.getActiveRange();
+  var values = range.getValues();
+  var formatted = values.map(row => row.map(cell => phone01(cell)));
+  range.setValues(formatted).setHorizontalAlignment("left");
+}
