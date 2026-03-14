@@ -1,0 +1,8 @@
+/** Fungsi: Format nombor telefon ke format 601X... */
+function formatPhone2() {
+  var sheet = SpreadsheetApp.getActiveSheet();
+  var range = sheet.getActiveRange();
+  var values = range.getValues();
+  var formatted = values.map(row => row.map(cell => phone02(cell)));
+  range.setValues(formatted).setHorizontalAlignment("left");
+}
