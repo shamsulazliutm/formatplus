@@ -1,0 +1,24 @@
+/** Fungsi: Format KP ke format 000000-00-0000 */
+function formatKP2() {
+  var sheet = SpreadsheetApp.getActiveSheet();
+  var range = sheet.getActiveRange();
+  var values = range.getValues();
+  var formatted = values.map(row => row.map(cell => formatkpb(cell)));
+  range.setValues(formatted).setHorizontalAlignment("center");
+}
+
+/** Fungsi: Format KP ke format 000000-00-0000 */
+function formatkpb(val) {
+  if (val === "") return val;
+  if (/[^0-9]/.test(val)) return val;
+  val = val.toString().replace(/[^\d]/g, "");
+  if (/^\d+$/.test(val)) {
+    if (val.length < 12 && val.length > 0) {
+      val = '0'.repeat(12 - val.length) + val;
+    }
+    return val.slice(0, 6) + '-' + val.slice(6, 8) + '-' + val.slice(8, 12);
+  } else {
+    return val;
+  }
+}
+
