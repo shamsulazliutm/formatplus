@@ -1,0 +1,17 @@
+/** Fungsi: Mencipta formula untuk siri bilangan secara automatik dalam
+sel yang dipilih, bermula dari sel A1.
+Contoh Penggunaan: Jika anda memilih sel bermula dari A1 dan ingin
+mencipta siri bilangan, FormatPlus+ akan menambahkan formula yang
+menghasilkan nombor siri bermula dari 1 dan seterusnya di sel-sel
+yang dipilih. Contohnya, sel A1 akan mempunyai nombor 1, sel A2 akan
+mempunyai nombor 2, dan seterusnya. */
+function sequenceA1() {
+  var sheet = SpreadsheetApp.getActiveSheet();
+  var cell = sheet.getActiveCell();
+  var row = cell.getRow();
+  var col = cell.getColumn();
+  var nextCol = String.fromCharCode(64 + col + 1);
+  var sequenceRange = `$${nextCol}$${row + 1}:$${nextCol}`;
+  var formula = `={"BIL"; SEQUENCE(COUNTA(${sequenceRange}))}`;
+  cell.setFormula(formula);
+}
