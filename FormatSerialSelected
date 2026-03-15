@@ -1,0 +1,22 @@
+/** Fungsi: Mencipta nombor siri bilangan secara automatik bagi sel yang
+dipilih sahaja.
+Contoh Penggunaan: Jika anda memilih beberapa sel dalam satu lajur,
+FormatPlus+ akan menambahkan nombor siri bermula dari 1 hingga n
+berdasarkan bilangan sel yang dipilih. Sebagai contoh, jika anda
+memilih tiga sel dalam satu lajur, nombor siri 1, 2, dan 3 akan diisikan
+dalam sel-sel tersebut. */
+function autoBilanganSelected() {
+  var sheet = SpreadsheetApp.getActiveSheet();
+  var range = sheet.getActiveRange();
+  var height = range.getHeight();
+  var width = range.getWidth();
+  var values = [];
+  for (var i = 0; i < height; i++) {
+    var rowData = [];
+    for (var j = 0; j < width; j++) {
+      rowData.push(i * width + j + 1);
+    }
+    values.push(rowData);
+  }
+  range.setValues(values);
+}
