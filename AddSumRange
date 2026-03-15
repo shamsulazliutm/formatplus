@@ -1,0 +1,8 @@
+/** Fungsi: Tambah formula SUM untuk julat yang dipilih */
+function addSumFormula() {
+  var sheet = SpreadsheetApp.getActiveSheet();
+  var range = sheet.getActiveRange();
+  var formula = `=SUM(${range.getA1Notation()})`;
+  var target = sheet.getRange(range.getLastRow() + 1, range.getColumn());
+  target.setFormula(formula).setFontWeight("bold");
+}
