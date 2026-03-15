@@ -1,0 +1,27 @@
+/** Fungsi: Mencipta nombor siri bilangan secara automatik bagi semua
+baris data dalam julat yang dipilih.
+Contoh Penggunaan: Jika julat yang dipilih mempunyai lima baris,
+setiap baris akan ditambah dengan nombor siri dari 1 hingga 5.
+*/
+
+function autoBilangan() {
+  var sheet = SpreadsheetApp.getActiveSheet();
+  var range = sheet.getActiveCell();
+  var col = range.getColumn();
+  var row = range.getRow();
+  var numCols = sheet.getActiveRange().getNumColumns();
+  var lastRow = sheet.getRange(row, col).getDataRegion().getLastRow();
+  var cell = sheet.getRange(row, col, lastRow - row + 1, numCols);
+  var height = cell.getHeight();
+  var width = cell.getWidth();
+  var values = [];
+  for (var i = 0; i < height; i++) {
+    var rowData = [];
+    for (var j = 0; j < width; j++) {
+      rowData.push(i * width + j + 1);
+    }
+    values.push(rowData);
+  }
+  cell.setValues(values);
+  sheet.getRange(row, col).activate();
+}
